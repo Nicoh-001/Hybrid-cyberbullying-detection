@@ -1,0 +1,189 @@
+.cyberbullying-highlight {
+    position: relative;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    cursor: help;
+}
+
+.cyberbullying-bully {
+    background-color: rgba(255, 193, 7, 0.2);
+    border-left: 3px solid rgba(255, 193, 7, 0.8);
+}
+
+.cyberbullying-severe {
+    background-color: rgba(220, 53, 69, 0.2);
+    border-left: 3px solid rgba(220, 53, 69, 0.8);
+}
+
+.cyberbullying-clean {
+    background-color: rgba(40, 167, 69, 0.2);
+    border-left: 3px solid rgba(40, 167, 69, 0.8);
+}
+
+.cyberbullying-explanation-tooltip {
+    position: fixed;
+    z-index: 999999;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 12px;
+    max-width: 350px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #333;
+    pointer-events: none;
+}
+
+.tooltip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #eee;
+}
+
+.tooltip-header strong {
+    font-size: 14px;
+    color: #d32f2f;
+}
+
+.tooltip-header span {
+    font-size: 12px;
+    color: #666;
+    background: #f5f5f5;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+.detected-text {
+    font-style: italic;
+    color: #555;
+    margin: 8px 0;
+    padding: 8px;
+    background: #f9f9f9;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.explanations {
+    margin-top: 10px;
+}
+
+.explanations h4 {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    color: #333;
+}
+
+.explanation-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    padding: 4px 0;
+}
+
+.impact-direction {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.impact-direction.positive {
+    background-color: rgba(211, 47, 47, 0.1);
+    color: #d32f2f;
+}
+
+.impact-direction.negative {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.explanation-text {
+    flex: 1;
+    font-size: 12px;
+}
+
+.impact-value {
+    font-size: 11px;
+    color: #666;
+    margin-left: 8px;
+    font-family: monospace;
+}
+
+.no-explanations {
+    font-size: 12px;
+    color: #666;
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Privacy mode styles */
+body.cyberbullying-privacy-mode img,
+body.cyberbullying-privacy-mode [class*="avatar"],
+body.cyberbullying-privacy-mode [class*="profile"],
+body.cyberbullying-privacy-mode [class*="user-img"],
+body.cyberbullying-privacy-mode [class*="media"],
+body.cyberbullying-privacy-mode [class*="image"] {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    pointer-events: none !important;
+}
+
+body.cyberbullying-privacy-mode [class*="username"],
+body.cyberbullying-privacy-mode [class*="user-name"],
+body.cyberbullying-privacy-mode [class*="handle"],
+body.cyberbullying-privacy-mode [data-testid*="User-Name"],
+body.cyberbullying-privacy-mode [data-testid*="user-name"],
+body.cyberbullying-privacy-mode [class*="author"],
+body.cyberbullying-privacy-mode [class*="screen-name"] {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    pointer-events: none !important;
+}
+
+/* Platform-specific hiding */
+body.cyberbullying-privacy-mode [data-testid="tweetPhoto"],
+body.cyberbullying-privacy-mode [data-testid="userAvatar"],
+body.cyberbullying-privacy-mode [data-visualcompletion="media-image"],
+body.cyberbullying-privacy-mode [aria-label="Photo"],
+body.cyberbullying-privacy-mode [aria-label="Photo by"],
+body.cyberbullying-privacy-mode [class*="FFVAD"],
+body.cyberbullying-privacy-mode [style*="background-image"] {
+    display: none !important;
+    background-image: none !important;
+}
+
+body.cyberbullying-privacy-mode .cyberbullying-highlight {
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    width: auto !important;
+    height: auto !important;
+    margin: inherit !important;
+    padding: inherit !important;
+    border: inherit !important;
+    pointer-events: auto !important;
+}

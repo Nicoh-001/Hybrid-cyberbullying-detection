@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cyberbullying Shield</title>
+    <link rel="stylesheet" href="popup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="../icons/icon48.png" alt="Cyberbullying Shield" class="logo">
+            <div class="header-text">
+                <h1>Cyberbullying Shield</h1>
+                <p class="subtitle">Protecting your online experience</p>
+            </div>
+        </div>
+
+        <div class="status-container">
+            <div class="status-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="toggleEnabled">
+                    <span class="slider round"></span>
+                </label>
+                <span id="statusText">Enabled</span>
+            </div>
+            <div class="api-status" id="apiStatus">
+                <span class="status-dot"></span>
+                <span class="status-text">Checking API...</span>
+            </div>
+        </div>
+
+        <div class="settings-panel">
+            <div class="settings-section">
+                <h2>Detection Settings</h2>
+                <div class="setting-item">
+                    <label for="threshold">Confidence Threshold: <span id="thresholdValue">70%</span></label>
+                    <input type="range" id="threshold" min="0.5" max="0.95" step="0.05" value="0.7">
+                    <div class="threshold-labels">
+                        <span>Lenient</span>
+                        <span>Strict</span>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label for="privacyToggle">Privacy Mode:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="privacyToggle" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="setting-description">Hides usernames, profile pictures, and media during detection</div>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <h2>Current Page Analysis</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon clean-icon">✓</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Clean Content</span>
+                            <span class="stat-value" id="cleanCount">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card clickable" id="bullyStatCard">
+                        <div class="stat-icon bully-icon">!</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Bullying</span>
+                            <span class="stat-value" id="bullyCount">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card clickable" id="severeStatCard">
+                        <div class="stat-icon severe-icon">!!</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Severe</span>
+                            <span class="stat-value" id="severeCount">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="countsLastUpdated" class="last-updated">Last updated: --</div>
+                <button id="rescanBtn" class="btn primary">Rescan Page</button>
+            </div>
+
+            <div class="manual-section">
+                <h2>Test Text</h2>
+                <textarea id="manualText" rows="4" placeholder="Enter text to analyze for bullying..."></textarea>
+                <button id="testTextBtn" class="btn primary">Analyze Text</button>
+                <div id="manualResult" class="result-container">
+                    <div class="result-placeholder">Results will appear here</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <button id="reportBtn" class="btn secondary">Report False Positive</button>
+            <button id="settingsBtn" class="btn tertiary">Advanced Settings</button>
+        </div>
+    </div>
+
+    <!-- Detections Modal -->
+    <div id="detectionsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Detected Content</h3>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="bully">Bullying</button>
+                <button class="tab-btn" data-tab="severe">Severe</button>
+                <button class="tab-btn settings-tab" data-tab="settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="bullyTab" class="tab-content active">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Text</th>
+                            <th>Confidence</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bullyList"></tbody>
+                </table>
+            </div>
+            <div id="severeTab" class="tab-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Text</th>
+                            <th>Confidence</th>
+                        </tr>
+                    </thead>
+                    <tbody id="severeList"></tbody>
+                </table>
+            </div>
+            <div id="settingsTab" class="tab-content">
+                <h4>Highlight Colors</h4>
+                <div class="setting-item">
+                    <label for="cleanColor">Clean Text Color:</label>
+                    <input type="color" id="cleanColor" value="#28a745">
+                </div>
+                <div class="setting-item">
+                    <label for="bullyColor">Bullying Text Color:</label>
+                    <input type="color" id="bullyColor" value="#ffc107">
+                </div>
+                <div class="setting-item">
+                    <label for="severeColor">Severe Bullying Color:</label>
+                    <input type="color" id="severeColor" value="#dc3545">
+                </div>
+                <button id="saveColorSettings" class="btn primary">Save Colors</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
