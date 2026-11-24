@@ -1,0 +1,69 @@
+=== Emotion Features ===
+emotion_0: admiration
+emotion_1: amusement
+emotion_2: anger
+emotion_3: annoyance
+emotion_4: approval
+emotion_5: caring
+emotion_6: confusion
+emotion_7: curiosity
+emotion_8: desire
+emotion_9: disappointment
+emotion_10: disapproval
+emotion_11: disgust
+emotion_12: embarrassment
+emotion_13: excitement
+emotion_14: fear
+emotion_15: gratitude
+emotion_16: grief
+emotion_17: joy
+emotion_18: love
+emotion_19: nervousness
+emotion_20: neutral
+emotion_21: optimism
+emotion_22: pride
+emotion_23: realization
+emotion_24: relief
+emotion_25: remorse
+emotion_26: sadness
+emotion_27: surprise
+
+=== Sentiment Features ===
+sentiment_score: positive_score - negative_score
+sentiment_0: negative
+sentiment_1: neutral
+sentiment_2: positive
+
+=== Embedding Features ===
+embedding_{i}: RoBERTa embedding dimension {i} (0-767)
+
+=== Latent Features ===
+latent_{i}: VAE compressed feature {i}
+
+=== Feature Selection Info ===
+Selected 157 best features out of 157
+Top 20 selected features:
+Feature 28: score=1021335.2500
+Feature 1: score=846240.2500
+Feature 0: score=842817.1875
+Feature 21: score=57981.4258
+Feature 13: score=34749.2461
+Feature 80: score=23069.8887
+Feature 85: score=22894.3066
+Feature 26: score=22749.2754
+Feature 69: score=22732.4629
+Feature 95: score=20621.6582
+Feature 130: score=20402.7266
+Feature 131: score=20275.7207
+Feature 137: score=20110.4785
+Feature 132: score=19783.2109
+Feature 93: score=19196.4883
+Feature 148: score=18991.6211
+Feature 59: score=18315.9121
+Feature 71: score=17424.1719
+Feature 151: score=17376.9395
+Feature 143: score=17105.4160
+
+=== PCA Info ===
+Explained variance ratio: 0.9921
+Number of components: 6
